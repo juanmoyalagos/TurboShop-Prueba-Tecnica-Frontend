@@ -25,3 +25,6 @@ dist-ssr
 
 # Yarn Integrity file
 .yarn/install-state.gz
+
+# Environment variables file
+.env
