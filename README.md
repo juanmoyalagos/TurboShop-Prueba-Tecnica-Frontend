@@ -1,6 +1,6 @@
-# TurboShop Marketplace Frontend - React + TypeScript + Vite
+# TurboShop Marketplace Frontend - React + TypeScript + Vite + Tailwind
 
-SPA en React + TypeScript (Vite) para explorar repuestos de diferentes proveedores. Incluye búsqueda, filtros, paginación y actualizaciones en tiempo real vía Server-Sent Events (SSE) unidireccional cuando cambian precios/stock o aparecen nuevas ofertas.
+SPA en React + TypeScript (Vite) + Tailwind para explorar repuestos de diferentes proveedores. Incluye búsqueda, filtros, paginación y actualizaciones en tiempo real vía Server-Sent Events (SSE) unidireccional cuando cambian precios/stock o aparecen nuevas ofertas.
 
 ## ⚙️ Requisitos previos
 - Node.js
