@@ -25,7 +25,7 @@ SPA en React + TypeScript (Vite) + Tailwind para explorar repuestos de diferente
    ```bash
    yarn dev
    ```
-Debería mostrar en consola:
+5. **Debería mostrar en consola:**
    ```bash
    Local:   http://localhost:5173/
    ```
