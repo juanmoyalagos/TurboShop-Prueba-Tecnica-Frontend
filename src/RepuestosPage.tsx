@@ -37,15 +37,6 @@ export default function RepuestosPage() {
 
   const refetch = useCallback(async () => {
     const url = `${API_URL}/offers?${queryParams}`;
-    console.log("[RepuestosPage] Fetch URL:", url);
-    console.log("[RepuestosPage] Refetch lista", {
-      page,
-      search,
-      brand,
-      make,
-      model,
-      year,
-    });
     setLoading(true);
     setError(null);
     try {
@@ -105,7 +96,6 @@ export default function RepuestosPage() {
         refetch();
         return;
       }
-      console.log("[RepuestosPage] SSE update_batch", data.items.length);
       setProducts((prev) => {
         let needsRefetch = false;
         const next = prev.map((p) => {
