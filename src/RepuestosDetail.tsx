@@ -1,15 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-  ArrowLeft,
-  Loader2,
-  ShieldCheck,
-  Wrench,
-  Info,
-} from "lucide-react";
+import { ArrowLeft, Loader2, ShieldCheck, Wrench, Info } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import type { ProductDetail } from "./types/productDetail";
 import { useSSE } from "./SSEProvider";
-
 
 const API_URL = import.meta.env.VITE_API_URL ?? "";
 
@@ -32,7 +25,9 @@ export default function RepuestosDetail() {
         if (!response.ok) {
           const fallbackText = await response.text();
           throw new Error(
-            `Error ${response.status}: no se pudo cargar el repuesto. Detalle: ${fallbackText.slice(
+            `Error ${
+              response.status
+            }: no se pudo cargar el repuesto. Detalle: ${fallbackText.slice(
               0,
               120
             )}`
@@ -62,7 +57,12 @@ export default function RepuestosDetail() {
 
   const handleSSE = useCallback(
     (data: any) => {
-      if (!sku || !data || data.type !== "catalog:update_batch" || !Array.isArray(data.items)) {
+      if (
+        !sku ||
+        !data ||
+        data.type !== "catalog:update_batch" ||
+        !Array.isArray(data.items)
+      ) {
         return;
       }
 
@@ -231,7 +231,8 @@ export default function RepuestosDetail() {
                               {offer.provider?.name ?? "Proveedor"}
                             </span>
                             <span className="text-xs text-white/60">
-                              {offer.currency} ${formatNumber(offer.price_value)}
+                              {offer.currency} $
+                              {formatNumber(offer.price_value)}
                             </span>
                           </div>
                           <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-100">
@@ -281,4 +282,3 @@ export default function RepuestosDetail() {
     </main>
   );
 }
-

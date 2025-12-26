@@ -35,7 +35,7 @@ export default function RepuestosPage() {
     return params.toString();
   }, [page, search, brand, make, model, year]);
 
-  const refetch = async () => {
+  const refetch = useCallback(async () => {
     const url = `${API_URL}/offers?${queryParams}`;
     console.log("[RepuestosPage] Fetch URL:", url);
     console.log("[RepuestosPage] Refetch lista", {
@@ -54,7 +54,12 @@ export default function RepuestosPage() {
       if (!response.ok) {
         const fallbackText = await response.text();
         throw new Error(
-          `Error ${response.status}: no se pudieron cargar los repuestos. Detalle: ${fallbackText.slice(0, 120)}`
+          `Error ${
+            response.status
+          }: no se pudieron cargar los repuestos. Detalle: ${fallbackText.slice(
+            0,
+            120
+          )}`
         );
       }
       const data = contentType.includes("application/json")
@@ -73,7 +78,7 @@ export default function RepuestosPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [queryParams, page, search, brand, make, model, year]);
 
   useEffect(() => {
     let isMounted = true;
@@ -84,11 +89,20 @@ export default function RepuestosPage() {
     return () => {
       isMounted = false;
     };
-  }, [queryParams]);
+  }, [refetch]);
 
   const handleSSE = useCallback(
     (data: any) => {
-      if (!data || data.type !== "catalog:update_batch" || !Array.isArray(data.items)) {
+      if (
+        !data ||
+        data.type !== "catalog:update_batch" ||
+        !Array.isArray(data.items)
+      ) {
+        return;
+      }
+      // Si el batch trae nuevas ofertas, refrescamos completo para verlas.
+      if (data.items.some((it: any) => it.change === "offer_created")) {
+        refetch();
         return;
       }
       console.log("[RepuestosPage] SSE update_batch", data.items.length);
@@ -325,7 +339,7 @@ export default function RepuestosPage() {
                 </div>
               )}
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {displayProducts.map((product) => (
+                {displayProducts.map((product) => (
                   <article
                     key={product.id}
                     role="button"
@@ -374,7 +388,8 @@ export default function RepuestosPage() {
                                   {offer.provider?.name ?? "Proveedor"}
                                 </span>
                                 <span className="text-xs text-white/60">
-                                  {offer.currency} ${formatNumber(offer.price_value)}
+                                  {offer.currency} $
+                                  {formatNumber(offer.price_value)}
                                 </span>
                               </div>
                               <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-100">
