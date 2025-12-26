@@ -7,15 +7,20 @@ SPA en React + TypeScript (Vite) para explorar repuestos de los diferentes prove
 - Yarn
 
 ## Instalación y ejecución
-1. Instala dependencias:
+1. Clonar el repositorio:
+   ```
+   git clone https://github.com/juanmoyalagos/TurboShop-Prueba-Tecnica-Frontend.git
+   cd TurboShop-Prueba-Tecnica-Frontend
+   ```
+2. Instala dependencias:
    ```
    yarn install
    ```
-2. Crea el archivo `.env` con la URL del backend:
+3. Crea el archivo `.env` con la URL del backend:
    ```
    VITE_API_URL=http://localhost:3000
    ```
-3. Levanta el proyecto en desarrollo:
+4. Levanta el proyecto en desarrollo:
    ```
    yarn dev
    ```
