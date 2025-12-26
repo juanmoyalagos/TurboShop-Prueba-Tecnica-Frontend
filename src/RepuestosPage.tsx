@@ -36,6 +36,8 @@ export default function RepuestosPage() {
   }, [page, search, brand, make, model, year]);
 
   const refetch = async () => {
+    const url = `${API_URL}/offers?${queryParams}`;
+    console.log("[RepuestosPage] Fetch URL:", url);
     console.log("[RepuestosPage] Refetch lista", {
       page,
       search,
@@ -47,7 +49,7 @@ export default function RepuestosPage() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/offers?${queryParams}`);
+      const response = await fetch(url);
       const contentType = response.headers.get("content-type") || "";
       if (!response.ok) {
         const fallbackText = await response.text();
