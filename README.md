@@ -25,6 +25,11 @@ SPA en React + TypeScript (Vite) + Tailwind para explorar repuestos de diferente
    ```bash
    yarn dev
    ```
+Debería mostrar en consola:
+   ```bash
+   Local:   http://localhost:5173/
+   ```
+
 ## 📡 SSE y datos en tiempo real
 - Se conecta a `VITE_API_URL/sse/events` para recibir cambios de precio/stock y nuevas ofertas sin recargar la página.
 - Al recibir eventos `catalog:update_batch` con `offer_created` se hace `refetch` automático de la lista.
